@@ -1,6 +1,6 @@
 [![godoc](https://img.shields.io/badge/godoc-reference-blue.svg)](https://pkg.go.dev/github.com/go-corelibs/chdirs)
-[![codecov](https://codecov.io/gh/go-corelibs/diff/graph/badge.svg?token=8I3llBeXkL)](https://codecov.io/gh/go-corelibs/chdirs)
-[![Go Report Card](https://goreportcard.com/badge/github.com/go-corelibs/diff)](https://goreportcard.com/report/github.com/go-corelibs/chdirs)
+[![codecov](https://codecov.io/gh/go-corelibs/chdirs/graph/badge.svg?token=8I3llBeXkL)](https://codecov.io/gh/go-corelibs/chdirs)
+[![Go Report Card](https://goreportcard.com/badge/github.com/go-corelibs/chdirs)](https://goreportcard.com/report/github.com/go-corelibs/chdirs)
 
 # go-corelibs/chdirs - push/pop current working directory
 
