@@ -1,4 +1,4 @@
-module github.com/go-curses/corelibs/chdirs
+module github.com/go-corelibs/chdirs
 
 go 1.21.0
 
