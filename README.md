@@ -2,9 +2,9 @@
 [![codecov](https://codecov.io/gh/go-corelibs/chdirs/graph/badge.svg?token=8I3llBeXkL)](https://codecov.io/gh/go-corelibs/chdirs)
 [![Go Report Card](https://goreportcard.com/badge/github.com/go-corelibs/chdirs)](https://goreportcard.com/report/github.com/go-corelibs/chdirs)
 
-# go-corelibs/chdirs - push/pop current working directory
+# chdirs - push/pop current working directory
 
-chdirs is a packge for managing the current working directory in a similar
+chdirs is a package for managing the current working directory in a similar
 fashion to the unix shell `pushd` and `popd` functions.
 
 # Installation
@@ -13,7 +13,7 @@ fashion to the unix shell `pushd` and `popd` functions.
 > go get github.com/go-corelibs/chdirs@latest
 ```
 
-# Description
+# Examples
 
 ## Push/Pop
 
