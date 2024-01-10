@@ -2,6 +2,6 @@
 
 VERSION_TAGS += CHDIRS
 CHDIRS_MK_SUMMARY := go-corelibs/chdirs
-CHDIRS_MK_VERSION := v1.0.2
+CHDIRS_MK_VERSION := v1.1.0
 
 include CoreLibs.mk
