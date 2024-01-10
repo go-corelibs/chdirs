@@ -15,7 +15,7 @@ fashion to the unix shell `pushd` and `popd` functions.
 
 # Examples
 
-## Push/Pop
+## Push, Pop
 
 ``` go
 func main() {
@@ -30,6 +30,27 @@ func main() {
     // the above defer will pop the path to the
     // original working directory when all is
     // done
+}
+```
+
+## MockBadWD, UnMockBadWD
+
+``` go
+// need to test important code when os.Getwd or filepath.Abs may fail,
+// normally these tests are acceptably not written, however for command
+// line programs where the current working directory could be anything,
+// this testing is in fact quite necessary...
+
+func Test(t *testing.T) {
+    Convey("handling of os.Getwd/filepath.Abs errors", t, func() {
+        err := MockBadWD()
+        So(err, ShouldEqual, nil)
+        /*
+          ... test code handling os.Getwd and/or filepath.Abs errors ...
+        */
+        err = UnMockBadWD()
+        So(err, ShouldEqual, nil)
+    })
 }
 ```
 
