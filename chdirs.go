@@ -32,12 +32,11 @@ func Push(path string) (err error) {
 	gPushPop.Lock()
 	defer gPushPop.Unlock()
 	var cwd string
-	if cwd, err = os.Getwd(); err != nil {
-		return
-	} else if err = os.Chdir(path); err != nil {
-		return
+	if cwd, err = os.Getwd(); err == nil {
+		if err = os.Chdir(path); err == nil {
+			gPushPop.stack = append(gPushPop.stack, cwd)
+		}
 	}
-	gPushPop.stack = append(gPushPop.stack, cwd)
 	return
 }
 
