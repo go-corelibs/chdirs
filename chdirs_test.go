@@ -28,6 +28,7 @@ func Test(t *testing.T) {
 	}
 
 	Convey("push, stack, pop", t, func() {
+
 		Convey("push", func() {
 			So(Push(".."), ShouldEqual, nil)
 			So(Push(".."), ShouldEqual, nil)
@@ -52,5 +53,17 @@ func Test(t *testing.T) {
 		Convey("bad push", func() {
 			So(Push("/!not!a!path"), ShouldNotEqual, nil)
 		})
+
+		Convey("mock bad wd", func() {
+			cwd, err = os.Getwd()
+			So(err, ShouldEqual, nil)
+			err = MockBadWD()
+			So(err, ShouldEqual, nil)
+			_, err = os.Getwd()
+			So(err, ShouldEqual, nil)
+			err = UnMockBadWD()
+			So(err, ShouldEqual, nil)
+		})
+
 	})
 }

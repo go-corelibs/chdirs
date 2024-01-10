@@ -24,6 +24,10 @@ var (
 		stack []string
 		sync.RWMutex
 	}{}
+	gMockWD = struct {
+		stack []string
+		sync.RWMutex
+	}{}
 )
 
 // Push notes the current working directory and changes directory to the given
@@ -62,5 +66,43 @@ func Stack() (stack []string) {
 	gPushPop.RLock()
 	defer gPushPop.RUnlock()
 	stack = gPushPop.stack[:]
+	return
+}
+
+// MockBadWD is intended to be used during unit testing and not something
+// generally useful. MockBadWD changes to a new temp directory and then
+// deletes the directory. This leaves the running code in a case where
+// calling os.Getwd will throw and error, which in turn causes filepath.Abs
+// to throw an error
+//
+// Call MockRestoreWD to restore the working directory to the location the
+// runtime was at when UnMockBadWD was called
+func MockBadWD() (err error) {
+	gMockWD.Lock()
+	defer gMockWD.Unlock()
+	if len(gMockWD.stack) == 0 {
+		// working directory not mocked
+		var cwd, tmpDir string
+		if cwd, err = os.Getwd(); err == nil {
+			if tmpDir, err = os.MkdirTemp("", "corelibs-chdirs-mock-bad-wd.*.d"); err == nil {
+				gMockWD.stack = append(gMockWD.stack, cwd)
+				err = os.RemoveAll(tmpDir)
+			}
+		}
+	}
+	return
+}
+
+// UnMockBadWD restores the runtime to the original working directory when
+// MockBadWD was called
+func UnMockBadWD() (err error) {
+	gMockWD.Lock()
+	defer gMockWD.Unlock()
+	if len(gMockWD.stack) > 0 {
+		// should only have length of 1
+		owd := gMockWD.stack[0]
+		gMockWD.stack = []string{}
+		err = os.Chdir(owd)
+	}
 	return
 }
