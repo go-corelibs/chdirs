@@ -75,8 +75,8 @@ func Stack() (stack []string) {
 // calling os.Getwd will throw and error, which in turn causes filepath.Abs
 // to throw an error
 //
-// Call MockRestoreWD to restore the working directory to the location the
-// runtime was at when UnMockBadWD was called
+// Call UnMockBadWD to restore the working directory to the location the
+// runtime was at when MockBadWD was called
 func MockBadWD() (err error) {
 	gMockWD.Lock()
 	defer gMockWD.Unlock()
