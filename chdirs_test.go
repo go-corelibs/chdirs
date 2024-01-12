@@ -60,7 +60,7 @@ func Test(t *testing.T) {
 			err = MockBadWD()
 			So(err, ShouldEqual, nil)
 			_, err = os.Getwd()
-			So(err, ShouldEqual, nil)
+			So(err, ShouldNotEqual, nil)
 			err = UnMockBadWD()
 			So(err, ShouldEqual, nil)
 		})

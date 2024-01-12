@@ -85,8 +85,10 @@ func MockBadWD() (err error) {
 		var cwd, tmpDir string
 		if cwd, err = os.Getwd(); err == nil {
 			if tmpDir, err = os.MkdirTemp("", "corelibs-chdirs-mock-bad-wd.*.d"); err == nil {
-				gMockWD.stack = append(gMockWD.stack, cwd)
-				err = os.RemoveAll(tmpDir)
+				if err = os.Chdir(tmpDir); err == nil {
+					gMockWD.stack = append(gMockWD.stack, cwd)
+					err = os.RemoveAll(tmpDir)
+				}
 			}
 		}
 	}
